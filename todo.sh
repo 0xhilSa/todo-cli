@@ -21,7 +21,7 @@ main(){
   local cmd=$1
   local args=${2:-}
 
-  if [[ "$cmd" == "ls" ]]; then
+  if [[ "$cmd" == "ls" || "$cmd" == "show" ]]; then
     i=1
     while IFS= read -r line; do
       if [[ "$line" =~ ^\[X\] ]]; then
@@ -67,9 +67,16 @@ main(){
       sed -i "${args}s/^\[ \]/[X]/" "$FILE"
     fi
   elif [[ "$cmd" == "undone" && -n "$args" ]]; then
-    if sed -n "${args}p" "$FILE" | grep -q "^\[ \]"; then
-      echo -e "${BOLD}Task is already listed in the queue${RST}"
-      sed -i "${args}s/^\[X\]/[ ]/" "$FILE"
+    if ! [[ "$args" =~ ^[0-9]+$ ]]; then
+      echo -e "${RED}Error: Index must be a valid number${RST}"
+    elif (( args < 1 || args > $(wc -l < "$FILE") )); then
+      echo -e "${RED}Error: Invalid index${RST}"
+    else
+      if sed -n "${args}p" "$FILE" | grep -q "^\[X\]"; then
+        sed -i "${args}s/^\[X\]/[ ]/" "$FILE"
+      else
+        echo -e "${BOLD}Task is already listed in the queue${RST}"
+      fi
     fi
   elif [[ "$cmd" == "rm" || "$cmd" == "remove" ]]; then
     if [[ -z "$args" ]]; then
