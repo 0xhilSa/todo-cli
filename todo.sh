@@ -37,7 +37,7 @@ main(){
     echo -e "${CYAN}${BOLD}Version: ${YELLOW}$VERSION${RST}\n"
 
     echo -e "${UNDERLINE}${BOLD}Usage:${RST}"
-    echo -e "  ${BOLD}./todo.sh${RST} [command] [argument](optional for some commands e.g. ls, help)\n"
+    echo -e "  ${BOLD}todo.sh${RST} [command] [argument](optional for some commands e.g. ls, help)\n"
 
     echo -e " ${UNDERLINE}${BOLD}Commands:${RST}"
     echo -e "  ${BOLD}ls/show                  - List all tasks${RST}"
