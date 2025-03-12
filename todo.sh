@@ -10,11 +10,12 @@ UNDERLINE="\033[4;34m"
 RST="\033[0m"
 BOLD="\033[1m"
 FILE="$HOME/.todo.txt"
-VERSION="0.1"
+VERSION="0.2"
 
 if [[ ! -f "$FILE" ]]; then
   touch "$FILE"
 fi
+sed -i '/^\[ \]/!{/^\[x\]/!d;}' "$FILE"
 sed -i '/^$/d' "$HOME/.todo.txt"
 
 main(){
