@@ -15,7 +15,7 @@ VERSION="0.2"
 if [[ ! -f "$FILE" ]]; then
   touch "$FILE"
 fi
-sed -i '/^\[ \]/!{/^\[x\]/!d;}' "$FILE"
+sed -i '/^\[ \]/!{/^\[X\]/!d;}' "$FILE"
 sed -i '/^$/d' "$HOME/.todo.txt"
 
 main(){
